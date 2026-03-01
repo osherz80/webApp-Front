@@ -1,64 +1,127 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { ThemeProvider, CssBaseline, Button, Container, Typography, Box, Card, IconButton, useMediaQuery } from '@mui/material'
+import { Brightness4, Brightness7, RocketLaunch, ColorLens } from '@mui/icons-material'
+import { lightTheme, darkTheme } from './styles/theme'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+
+  const [mode, setMode] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme')
       if (saved === 'dark' || saved === 'light') return saved
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
-    return 'light'
+    return prefersDarkMode ? 'dark' : 'light'
   })
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
-  }, [theme])
+    document.documentElement.setAttribute('data-theme', mode)
+    localStorage.setItem('theme', mode)
+  }, [mode])
+
+  const theme = useMemo(() => (mode === 'light' ? lightTheme : darkTheme), [mode])
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light')
+    setMode(prev => prev === 'light' ? 'dark' : 'light')
   }
 
   return (
-    <div className="app-container">
-      <header className="app-header">
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {theme === 'light' ? '🌙' : '☀️'}
-        </button>
-      </header>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box className="app-container" sx={{
+        minHeight: '100vh',
+        bgcolor: 'background.default',
+        color: 'text.primary',
+        transition: 'all 0.3s ease'
+      }}>
+        <Container maxWidth="lg">
+          <header className="app-header">
+            <IconButton onClick={toggleTheme} color="inherit" sx={{
+              bgcolor: 'background.paper',
+              boxShadow: 1,
+              '&:hover': { transform: 'rotate(15deg) scale(1.1)' }
+            }}>
+              {mode === 'light' ? <Brightness4 /> : <Brightness7 />}
+            </IconButton>
+          </header>
 
-      <main>
-        <div className="hero">
-          <h1>Modern. Sleek. <br /><span>High Performance.</span></h1>
-          <p className="subtitle">
-            Experience the future of web development with Vite, React, and Antigravity's Premium Design System.
-          </p>
-        </div>
+          <main>
+            <Box className="hero" sx={{ textAlign: 'center', py: 8 }}>
+              <Typography variant="h1" gutterBottom sx={{
+                fontSize: { xs: '3rem', md: '4.5rem' },
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #3b82f6 0%, #a855f7 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                mb: 2
+              }}>
+                Material UI + <br /> Premium Design
+              </Typography>
+              <Typography variant="h6" className="subtitle" sx={{ opacity: 0.8, maxWidth: 600, mx: 'auto', mb: 6 }}>
+                The power of MUI meets the elegance of our custom design system. Fully themed, responsive, and performance-ready.
+              </Typography>
+            </Box>
 
-        <div className="card">
-          <h2>Level Up Your App</h2>
-          <p>
-            This project is initialized with TypeScript, strict linting, and a high-end CSS architecture.
-          </p>
-          <div className="actions">
-            <button className="primary-btn" onClick={() => setCount((count) => count + 1)}>
-              The Count is {count}
-            </button>
-          </div>
-          <footer className="card-footer">
-            <p>
-              Edit <code>src/App.tsx</code> to start building your masterpiece.
-            </p>
+            <Card className="glass-card" sx={{
+              maxWidth: 500,
+              mx: 'auto',
+              p: { xs: 3, md: 5 },
+              borderRadius: 6,
+              background: mode === 'light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(30, 41, 59, 0.8)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid',
+              borderColor: 'divider',
+              boxShadow: 'var(--surface-shadow)',
+              textAlign: 'center'
+            }}>
+              <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center', gap: 2 }}>
+                <RocketLaunch color="primary" sx={{ fontSize: 40 }} />
+                <ColorLens color="secondary" sx={{ fontSize: 40 }} />
+              </Box>
+
+              <Typography variant="h4" fontWeight={700} gutterBottom>
+                Atomic Integration
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'text.secondary', mb: 4 }}>
+                This card uses MUI components styled with our custom theme. Click below to see the state in action.
+              </Typography>
+
+              <Box className="actions" sx={{ mb: 4 }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  onClick={() => setCount((c) => c + 1)}
+                  sx={{
+                    borderRadius: 3,
+                    px: 4,
+                    py: 1.5,
+                    fontSize: '1rem',
+                    textTransform: 'none',
+                    fontWeight: 700
+                  }}
+                >
+                  Explore Count: {count}
+                </Button>
+              </Box>
+
+              <Box sx={{ p: 1.5, bgcolor: 'action.hover', borderRadius: 2, display: 'inline-block' }}>
+                <Typography variant="caption" sx={{ fontFamily: 'monospace' }}>
+                  src/App.tsx (MUI Components Active)
+                </Typography>
+              </Box>
+            </Card>
+          </main>
+
+          <footer className="app-footer">
+            <Typography variant="body2" align="center" sx={{ py: 6, opacity: 0.6 }}>
+              © {new Date().getFullYear()} WebApp Front • Built with MUI & Passion
+            </Typography>
           </footer>
-        </div>
-      </main>
-
-      <footer className="app-footer">
-        <p>© {new Date().getFullYear()} WebApp Front • Built with Passion</p>
-      </footer>
-    </div>
+        </Container>
+      </Box>
+    </ThemeProvider>
   )
 }
 
