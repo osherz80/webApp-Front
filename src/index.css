@@ -5,17 +5,17 @@
   --primary-h: 220;
   --primary-s: 70%;
   --primary-l: 50%;
-  
+
   --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
   --primary-hover: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 10%));
   --primary-foreground: hsl(0, 0%, 100%);
-  
+
   --secondary: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.1);
   --secondary-foreground: var(--primary);
-  
+
   --background: hsl(220, 20%, 98%);
   --foreground: hsl(220, 40%, 10%);
-  
+
   --surface: hsl(0, 0%, 100%);
   --surface-border: hsla(220, 20%, 30%, 0.1);
   --surface-shadow: 0 4px 12px -2px hsla(220, 20%, 10%, 0.05);
@@ -28,7 +28,7 @@
   line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--foreground);
   background-color: var(--background);
 
@@ -38,29 +38,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-[data-theme='dark'] {
-  --background: hsl(220, 30%, 6%);
-  --foreground: hsl(220, 10%, 96%);
-  
-  --surface: hsl(220, 30%, 10%);
-  --surface-border: hsla(220, 10%, 90%, 0.1);
-  --surface-shadow: 0 8px 32px -4px hsla(0, 0%, 0%, 0.5);
-  
-  --primary-l: 60%; /* Lighten primary for dark mode */
-}
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --background: hsl(220, 30%, 6%);
-    --foreground: hsl(220, 10%, 96%);
-    
-    --surface: hsl(220, 30%, 10%);
-    --surface-border: hsla(220, 10%, 90%, 0.1);
-    --surface-shadow: 0 8px 32px -4px hsla(0, 0%, 0%, 0.5);
-    
-    --primary-l: 60%;
-  }
-}
 
 * {
   box-sizing: border-box;
@@ -75,7 +53,7 @@ body {
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle at top right, hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.05), transparent),
-              radial-gradient(circle at bottom left, hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.05), transparent);
+    radial-gradient(circle at bottom left, hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.05), transparent);
   background-attachment: fixed;
 }
 
@@ -152,9 +130,7 @@ p {
   margin: 1.5rem 0;
 }
 
-[data-theme='dark'] p {
-  color: hsla(220, 10%, 80%, 0.8);
-}
+
 
 .logo {
   height: 6rem;
@@ -172,7 +148,15 @@ p {
 }
 
 @media (max-width: 640px) {
-  h1 { font-size: 2.5rem; }
-  #root { padding: 1rem; }
-  .card { padding: 2rem; }
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  #root {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 2rem;
+  }
 }

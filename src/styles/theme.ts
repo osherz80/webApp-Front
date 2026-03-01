@@ -51,18 +51,14 @@ export const lightTheme = createTheme({
             paper: '#ffffff',
         },
     },
-});
-
-export const darkTheme = createTheme({
-    ...baseThemeOptions,
-    palette: {
-        mode: 'dark',
-        primary: {
-            main: '#60a5fa', // Lighter for dark mode
-        },
-        background: {
-            default: '#0f172a',
-            paper: '#1e293b',
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 1024, // Laptop point
+            lg: 1280, // Desktop standard
+            xl: 1536, // Large monitors
         },
     },
+    spacing: 8,
 });

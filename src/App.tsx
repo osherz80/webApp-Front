@@ -1,34 +1,14 @@
-import { useState, useEffect, useMemo } from 'react'
-import { ThemeProvider, CssBaseline, Button, Container, Typography, Box, Card, IconButton, useMediaQuery } from '@mui/material'
-import { Brightness4, Brightness7, RocketLaunch, ColorLens } from '@mui/icons-material'
-import { lightTheme, darkTheme } from './styles/theme'
+import { useState } from 'react'
+import { ThemeProvider, CssBaseline, Button, Container, Typography, Box, Card } from '@mui/material'
+import { RocketLaunch, ColorLens } from '@mui/icons-material'
+import { lightTheme } from './styles/theme'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-
-  const [mode, setMode] = useState<'light' | 'dark'>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme')
-      if (saved === 'dark' || saved === 'light') return saved
-    }
-    return prefersDarkMode ? 'dark' : 'light'
-  })
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', mode)
-    localStorage.setItem('theme', mode)
-  }, [mode])
-
-  const theme = useMemo(() => (mode === 'light' ? lightTheme : darkTheme), [mode])
-
-  const toggleTheme = () => {
-    setMode(prev => prev === 'light' ? 'dark' : 'light')
-  }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       <Box className="app-container" sx={{
         minHeight: '100vh',
@@ -37,16 +17,6 @@ function App() {
         transition: 'all 0.3s ease'
       }}>
         <Container maxWidth="lg">
-          <header className="app-header">
-            <IconButton onClick={toggleTheme} color="inherit" sx={{
-              bgcolor: 'background.paper',
-              boxShadow: 1,
-              '&:hover': { transform: 'rotate(15deg) scale(1.1)' }
-            }}>
-              {mode === 'light' ? <Brightness4 /> : <Brightness7 />}
-            </IconButton>
-          </header>
-
           <main>
             <Box className="hero" sx={{ textAlign: 'center', py: 8 }}>
               <Typography variant="h1" gutterBottom sx={{
@@ -69,7 +39,7 @@ function App() {
               mx: 'auto',
               p: { xs: 3, md: 5 },
               borderRadius: 6,
-              background: mode === 'light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(30, 41, 59, 0.8)',
+              background: 'rgba(255, 255, 255, 0.8)',
               backdropFilter: 'blur(12px)',
               border: '1px solid',
               borderColor: 'divider',
