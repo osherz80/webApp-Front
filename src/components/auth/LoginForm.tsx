@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Box,
     Typography,
@@ -16,7 +15,11 @@ import {
 } from '@mui/icons-material';
 import { GoogleLoginButton } from './GoogleLoginButton';
 
-const LoginForm = () => (
+interface LoginFormProps {
+    onLogin?: () => void;
+}
+
+const LoginForm = ({ onLogin }: LoginFormProps) => (
     <Card
         sx={{
             width: '100%',
@@ -82,6 +85,7 @@ const LoginForm = () => (
                     variant="contained"
                     fullWidth
                     size="large"
+                    onClick={onLogin}
                     sx={{
                         bgcolor: '#10b981',
                         '&:hover': { bgcolor: '#0d9488' },
