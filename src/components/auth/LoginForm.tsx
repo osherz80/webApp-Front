@@ -14,6 +14,7 @@ import {
     EmailOutlined,
     LockOutlined
 } from '@mui/icons-material';
+import { GoogleLoginButton } from './GoogleLoginButton';
 
 const LoginForm = () => (
     <Card
@@ -21,7 +22,7 @@ const LoginForm = () => (
             width: '100%',
             maxWidth: 440,
             p: 5,
-            borderRadius: 6,
+            borderRadius: 2,
             boxShadow: '0 20px 50px rgba(0,0,0,0.06)',
         }}
     >
@@ -100,21 +101,7 @@ const LoginForm = () => (
                 </Typography>
             </Divider>
 
-            <Button
-                variant="outlined"
-                fullWidth
-                startIcon={<img src="https://www.google.com/favicon.ico" alt="Google" width={18} height={18} />}
-                sx={{
-                    py: 1.2,
-                    borderRadius: 2,
-                    textTransform: 'none',
-                    color: '#4b5563',
-                    borderColor: '#e5e7eb',
-                    '&:hover': { borderColor: '#d1d5db', bgcolor: '#f9fafb' }
-                }}
-            >
-                Continue with Google
-            </Button>
+            <GoogleLoginButton />
 
             <Typography variant="caption" color="text.secondary" align="center">
                 By signing in, you agree to our <Link href="#" sx={{ color: 'inherit' }}>Terms</Link> and <Link href="#" sx={{ color: 'inherit' }}>Privacy Policy</Link>.
