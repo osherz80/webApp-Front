@@ -1,6 +1,6 @@
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { lightTheme } from './styles/theme';
-import LandingPage from './components/LandingPage';
+import LandingPage from './pages/LandingPage';
 import './App.css';
 
 function App() {
