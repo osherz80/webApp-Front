@@ -1,7 +1,7 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
-export const useAuth = () => {
+export const useAuth = (onSuccess?: () => void) => {
     const handleGoogleSuccess = async (token: string) => {
         try {
             const response = await axios.post('http://localhost:3000/auth/google', {
@@ -11,6 +11,10 @@ export const useAuth = () => {
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
             console.log('User logged in successfully:', user);
+
+            if (onSuccess) {
+                onSuccess();
+            }
         } catch (error) {
             console.error('Backend verification failed:', error);
         }

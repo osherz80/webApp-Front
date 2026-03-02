@@ -105,7 +105,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => (
                 </Typography>
             </Divider>
 
-            <GoogleLoginButton />
+            <GoogleLoginButton onLogin={onLogin} />
 
             <Typography variant="caption" color="text.secondary" align="center">
                 By signing in, you agree to our <Link href="#" sx={{ color: 'inherit' }}>Terms</Link> and <Link href="#" sx={{ color: 'inherit' }}>Privacy Policy</Link>.

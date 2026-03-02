@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { lightTheme } from './styles/theme';
 import LandingPage from './pages/LandingPage';
@@ -8,11 +8,23 @@ import './App.css';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // Maintain login state on refresh
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
   return (
     <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       {!isAuthenticated ? (
-        <LandingPage onLogin={() => setIsAuthenticated(true)} />
+        <LandingPage onLogin={handleLoginSuccess} />
       ) : (
         <FeedPage />
       )}
