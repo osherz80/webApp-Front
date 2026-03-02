@@ -44,11 +44,16 @@ export const lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#3b82f6', // Corresponds to hsl(220, 70%, 50%)
+            main: '#10b981', // Brand green from image
+            contrastText: '#ffffff',
         },
         background: {
-            default: '#f8fafc',
+            default: '#ffffff',
             paper: '#ffffff',
+        },
+        text: {
+            primary: '#1f2937',
+            secondary: '#6b7280',
         },
     },
     breakpoints: {
