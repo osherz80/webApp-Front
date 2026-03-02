@@ -13,11 +13,7 @@ import BookCircleIcon from '../components/common/BookCircleIcon';
 import LoginForm from '../components/auth/LoginForm';
 import FeaturesSection from '../components/landing/FeaturesSection';
 
-interface LandingPageProps {
-    onLogin?: () => void;
-}
-
-const LandingPage = ({ onLogin }: LandingPageProps) => {
+const LandingPage = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -51,7 +47,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
                             Your community for discovering and sharing great reads.
                         </Typography>
                     </Box>
-                    <LoginForm onLogin={onLogin} />
+                    <LoginForm />
                 </Stack>
             </Container>
             <FeaturesSection />
