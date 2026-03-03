@@ -1,65 +1,45 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useSelector } from 'react-redux';
+import type { RootState } from './store';
+import { useEffect } from 'react';
+import { useCheckAuth } from './hooks/useCheckAuth';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { lightTheme } from './styles/theme';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import FeedPage from './pages/FeedPage';
+import DiscoverPage from './pages/DiscoverPage';
+import AddReviewPage from './pages/AddReviewPage';
+import ProfilePage from './pages/ProfilePage';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme')
-      if (saved === 'dark' || saved === 'light') return saved
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    return 'light'
-  })
+  const { isAuth } = useSelector((state: RootState) => state.auth);
+  const { checkAuth } = useCheckAuth();
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light')
-  }
+    checkAuth();
+  }, []);
 
   return (
-    <div className="app-container">
-      <header className="app-header">
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {theme === 'light' ? '🌙' : '☀️'}
-        </button>
-      </header>
+    <ThemeProvider theme={lightTheme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          {/* Public Route */}
+          <Route path="/" element={!isAuth ? <LandingPage /> : <Navigate to="/feed" />} />
 
-      <main>
-        <div className="hero">
-          <h1>Modern. Sleek. <br /><span>High Performance.</span></h1>
-          <p className="subtitle">
-            Experience the future of web development with Vite, React, and Antigravity's Premium Design System.
-          </p>
-        </div>
+          {/* Protected Routes */}
+          <Route path="/feed" element={isAuth ? <FeedPage /> : <Navigate to="/" />} />
+          <Route path="/discover" element={isAuth ? <DiscoverPage /> : <Navigate to="/" />} />
+          <Route path="/add-review" element={isAuth ? <AddReviewPage /> : <Navigate to="/" />} />
+          <Route path="/profile" element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
 
-        <div className="card">
-          <h2>Level Up Your App</h2>
-          <p>
-            This project is initialized with TypeScript, strict linting, and a high-end CSS architecture.
-          </p>
-          <div className="actions">
-            <button className="primary-btn" onClick={() => setCount((count) => count + 1)}>
-              The Count is {count}
-            </button>
-          </div>
-          <footer className="card-footer">
-            <p>
-              Edit <code>src/App.tsx</code> to start building your masterpiece.
-            </p>
-          </footer>
-        </div>
-      </main>
-
-      <footer className="app-footer">
-        <p>© {new Date().getFullYear()} WebApp Front • Built with Passion</p>
-      </footer>
-    </div>
-  )
+          {/* Catch all */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
