@@ -6,7 +6,7 @@ const Footer = () => {
             component="footer"
             sx={{
                 py: 4,
-                borderTop: '1px solid #f8fafc',
+                borderTop: '2px solid #f1f5f9',
                 bgcolor: '#ffffff',
                 mt: 'auto'
             }}
