@@ -34,12 +34,14 @@ export const useCheckAuth = () => {
         const token = localStorage.getItem('accessToken');
         if (token) {
             try {
+                console.log("token", token);
                 const response = await getProfile();
-                const { user, accessToken, refreshToken } = response.data;
+                const { user, accessToken, refreshToken, isAuth } = response.data;
                 dispatch(setAuthSuccess({
                     user,
                     accessToken,
-                    refreshToken
+                    refreshToken,
+                    isAuth
                 }));
 
             } catch (err) {

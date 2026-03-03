@@ -18,11 +18,11 @@ const authSlice = createSlice({
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
-        setAuthSuccess: (state, action: PayloadAction<{ user: User; accessToken: string; refreshToken: string }>) => {
+        setAuthSuccess: (state, action: PayloadAction<{ user: User; accessToken: string; refreshToken: string; isAuth: boolean }>) => {
             state.user = action.payload.user;
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
-            state.isAuth = true;
+            state.isAuth = action.payload.isAuth;
             state.loading = false;
             state.error = null;
 

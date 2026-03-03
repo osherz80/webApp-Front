@@ -11,12 +11,13 @@ export const useGoogleLogin = () => {
         dispatch(setLoading(true));
         try {
             const response = await googleLogin(token);
-            const { accessToken, refreshToken, user } = response.data;
+            const { accessToken, refreshToken, user, isAuth } = response.data;
 
             dispatch(setAuthSuccess({
                 user,
                 accessToken,
-                refreshToken
+                refreshToken,
+                isAuth
             }));
 
             console.log('User logged in successfully:', user);

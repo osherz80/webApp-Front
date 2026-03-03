@@ -9,5 +9,5 @@ export const refreshSession = (refreshToken: string) => {
 };
 
 export const getProfile = () => {
-    return API.get("/user/profile");
+    return API.get(`/user`);
 };
