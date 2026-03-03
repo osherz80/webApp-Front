@@ -1,17 +1,16 @@
-import { useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
+import { useGoogleLogin as useGoogleLoginReact } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { setAuthSuccess, setLoading, setAuthFailure } from '../store/authSlice';
+import { googleLogin } from '../api/Auth.api';
 
-export const useAuth = () => {
+export const useGoogleLogin = () => {
     const dispatch = useDispatch();
 
+    // auth with the server now
     const handleGoogleSuccess = async (token: string) => {
         dispatch(setLoading(true));
         try {
-            const response = await axios.post('http://localhost:3000/auth/google', {
-                token: token,
-            });
+            const response = await googleLogin(token);
             const { accessToken, refreshToken, user } = response.data;
 
             dispatch(setAuthSuccess({
@@ -32,7 +31,7 @@ export const useAuth = () => {
         dispatch(setAuthFailure('Google interaction failed'));
     };
 
-    const loginWithGoogle = useGoogleLogin({
+    const loginWithGoogle = useGoogleLoginReact({
         onSuccess: (tokenResponse) => {
             handleGoogleSuccess(tokenResponse.access_token);
         },

@@ -44,7 +44,7 @@ export const lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#10b981', // Brand green from image
+            main: '#10b981', // Brand green
             contrastText: '#ffffff',
         },
         background: {

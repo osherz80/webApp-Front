@@ -6,7 +6,7 @@ const initialState: AuthState = {
     user: null,
     accessToken: localStorage.getItem('accessToken'),
     refreshToken: localStorage.getItem('refreshToken'),
-    isAuthenticated: !!localStorage.getItem('accessToken'),
+    isAuth: !!localStorage.getItem('accessToken'),
     loading: false,
     error: null,
 };
@@ -22,7 +22,7 @@ const authSlice = createSlice({
             state.user = action.payload.user;
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
-            state.isAuthenticated = true;
+            state.isAuth = true;
             state.loading = false;
             state.error = null;
 
@@ -37,7 +37,7 @@ const authSlice = createSlice({
             state.user = null;
             state.accessToken = null;
             state.refreshToken = null;
-            state.isAuthenticated = false;
+            state.isAuth = false;
             state.loading = false;
             state.error = null;
 

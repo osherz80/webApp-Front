@@ -1,8 +1,8 @@
 import { Button } from '@mui/material';
-import { useAuth } from '../../hooks/useAuth';
+import { useGoogleLogin } from '../../hooks/useGoogleLogin';
 
 export const GoogleLoginButton = () => {
-    const { loginWithGoogle } = useAuth();
+    const { loginWithGoogle } = useGoogleLogin();
 
     return (
         <Button
