@@ -1,12 +1,13 @@
 import { useDispatch } from "react-redux";
 import { setAuthSuccess, logout } from "../store/authSlice";
 import { refreshSession, getProfile } from "../api/Auth.api";
+import { LOCAL_STORAGE_KEYS } from "../utils/const";
 
 export const useCheckAuth = () => {
     const dispatch = useDispatch();
 
     const handleRefresh = async () => {
-        const refreshToken = localStorage.getItem('refreshToken');
+        const refreshToken = localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
 
         if (!refreshToken) {
             console.warn('No refresh token found, user must login');
@@ -18,8 +19,8 @@ export const useCheckAuth = () => {
             const response = await refreshSession(refreshToken);
             const { accessToken, refreshToken: newRefreshToken } = response.data;
 
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', newRefreshToken);
+            localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+            localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, newRefreshToken);
 
             console.log('Tokens refreshed successfully');
             return accessToken;
@@ -31,7 +32,7 @@ export const useCheckAuth = () => {
     };
 
     const checkAuth = async () => {
-        const token = localStorage.getItem('accessToken');
+        const token = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
         if (token) {
             try {
                 console.log("token", token);

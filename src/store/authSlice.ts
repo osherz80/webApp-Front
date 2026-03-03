@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AuthState, User } from '../types/auth';
+import { LOCAL_STORAGE_KEYS } from '../utils/const';
 
 const initialState: AuthState = {
     user: null,
-    accessToken: localStorage.getItem('accessToken'),
-    refreshToken: localStorage.getItem('refreshToken'),
-    isAuth: !!localStorage.getItem('accessToken'),
+    accessToken: localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN),
+    refreshToken: localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN),
+    isAuth: !!localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN),
     loading: false,
     error: null,
 };
@@ -26,8 +27,8 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = null;
 
-            localStorage.setItem('accessToken', action.payload.accessToken);
-            localStorage.setItem('refreshToken', action.payload.refreshToken);
+            localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, action.payload.accessToken);
+            localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, action.payload.refreshToken);
         },
         setAuthFailure: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
@@ -41,8 +42,8 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = null;
 
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
+            localStorage.removeItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+            localStorage.removeItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
         }
     },
 });
