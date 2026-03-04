@@ -11,14 +11,3 @@ export interface AuthState {
     loading: boolean;
     error: string | null;
 }
-
-export interface LoginResponse {
-    accessToken: string;
-    user: User;
-    isAuth: boolean;
-}
-
-export interface ProfileResponse {
-    user: User;
-    isAuth: boolean;
-}

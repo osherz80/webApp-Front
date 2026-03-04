@@ -1,9 +1,19 @@
-import type { LoginResponse, ProfileResponse } from "../types/auth";
 import API from "./Axios";
+import type { RegisterLoginReq, RegisterLoginRes, ProfileResponse } from "./types/AuthApi";
 
 export const googleLogin = (token: string) => {
     console.log("googleLogin");
-    return API.post<LoginResponse>("/auth/google", { token });
+    return API.post<RegisterLoginRes>("/auth/google", { token });
+};
+
+export const login = (data: RegisterLoginReq) => {
+    console.log("login");
+    return API.post<RegisterLoginRes>("/auth/login", data);
+};
+
+export const register = (data: RegisterLoginReq) => {
+    console.log("register");
+    return API.post<RegisterLoginRes>("/auth/register", data);
 };
 
 export const refreshSession = () => {
@@ -15,3 +25,4 @@ export const getProfile = () => {
     console.log("getProfile");
     return API.get<ProfileResponse>(`/user`);
 };
+

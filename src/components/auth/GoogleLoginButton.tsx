@@ -10,7 +10,7 @@ export const GoogleLoginButton = () => {
             fullWidth
             startIcon={<img src="https://www.google.com/favicon.ico" alt="Google" width={18} height={18} />}
             sx={{
-                py: 1.2,
+                py: 2,
                 borderRadius: 2,
                 textTransform: 'none',
                 color: '#4b5563',
