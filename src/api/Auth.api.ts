@@ -1,9 +1,9 @@
-import type { User } from "../types/auth";
+import type { LoginResponse, ProfileResponse } from "../types/auth";
 import API from "./Axios";
 
 export const googleLogin = (token: string) => {
     console.log("googleLogin");
-    return API.post("/auth/google", { token });
+    return API.post<LoginResponse>("/auth/google", { token });
 };
 
 export const refreshSession = () => {
@@ -13,5 +13,5 @@ export const refreshSession = () => {
 
 export const getProfile = () => {
     console.log("getProfile");
-    return API.get<User>(`/user`);
+    return API.get<ProfileResponse>(`/user`);
 };

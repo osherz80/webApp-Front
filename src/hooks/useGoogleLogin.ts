@@ -2,6 +2,7 @@ import { useGoogleLogin as useGoogleLoginReact } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { setAuthSuccess, setLoading, setAuthFailure } from '../store/authSlice';
 import { googleLogin } from '../api/Auth.api';
+import { LOCAL_STORAGE_KEYS } from '../utils/const';
 
 export const useGoogleLogin = () => {
     const dispatch = useDispatch();
@@ -12,11 +13,12 @@ export const useGoogleLogin = () => {
         try {
             const response = await googleLogin(token);
             console.log("response googleLogin", response.data);
-            const { user, isAuth } = response.data;
 
+            const { user, isAuth, accessToken } = response.data;
+            localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
             dispatch(setAuthSuccess({
                 user,
-                isAuth
+                isAuth,
             }));
 
             console.log('User logged in successfully:', user);

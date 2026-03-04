@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from './store';
-import { useEffect } from 'react';
 import { useCheckAuth } from './hooks/useCheckAuth';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { lightTheme } from './styles/theme';

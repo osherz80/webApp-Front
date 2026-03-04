@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AuthState, User } from '../types/auth';
-import { LOCAL_STORAGE_KEYS } from '../utils/const';
 
 const initialState: AuthState = {
     user: null,
