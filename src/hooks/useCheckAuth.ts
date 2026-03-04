@@ -1,16 +1,19 @@
 import { useDispatch } from "react-redux";
 import { setAuthSuccess, logout } from "../store/authSlice";
 import { refreshSession } from "../api/Auth.api";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const useCheckAuth = () => {
     const dispatch = useDispatch();
-
+    const hasRun = useRef(false);
 
     useEffect(() => {
+        // Guard against React 18 StrictMode double-mount
+        if (hasRun.current) return;
+        hasRun.current = true;
+
         const checkAuth = async () => {
             try {
-                // Attempt to refresh the session - browser sends HttpOnly cookie automatically
                 const response = await refreshSession();
                 const { user, isAuth, accessToken } = response.data;
 
