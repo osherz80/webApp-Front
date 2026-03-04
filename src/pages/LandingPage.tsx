@@ -31,7 +31,7 @@ const LandingPage = () => {
                     </Stack>
                 </Container>
             </Box>
-            <Container maxWidth="xl" sx={{ flex: 1, py: { xs: 8, md: 12 } }}>
+            <Container maxWidth="xl" sx={{ flex: 1, py: 8 }}>
                 <Stack
                     direction={{ xs: 'column', md: 'row' }}
                     spacing={{ xs: 8, md: 4 }}

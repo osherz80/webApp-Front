@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from './store';
-import { useEffect } from 'react';
 import { useCheckAuth } from './hooks/useCheckAuth';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { lightTheme } from './styles/theme';
@@ -14,11 +13,8 @@ import './App.css';
 
 function App() {
   const { isAuth } = useSelector((state: RootState) => state.auth);
-  const { checkAuth } = useCheckAuth();
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  useCheckAuth();
 
   return (
     <ThemeProvider theme={lightTheme}>
@@ -26,7 +22,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Public Route */}
-          <Route path="/" element={!isAuth ? <LandingPage /> : <Navigate to="/feed" />} />
+          <Route path="/" element={isAuth ? <Navigate to="/feed" /> : <LandingPage />} />
 
           {/* Protected Routes */}
           <Route path="/feed" element={isAuth ? <FeedPage /> : <Navigate to="/" />} />

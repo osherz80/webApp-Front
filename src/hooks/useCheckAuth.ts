@@ -1,58 +1,34 @@
 import { useDispatch } from "react-redux";
 import { setAuthSuccess, logout } from "../store/authSlice";
-import { refreshSession, getProfile } from "../api/Auth.api";
-import { LOCAL_STORAGE_KEYS } from "../utils/const";
+import { refreshSession } from "../api/Auth.api";
+import { useEffect, useRef } from "react";
 
 export const useCheckAuth = () => {
     const dispatch = useDispatch();
+    const hasRun = useRef(false);
 
-    const handleRefresh = async () => {
-        const refreshToken = localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN);
+    useEffect(() => {
+        // Guard against React 18 StrictMode double-mount
+        if (hasRun.current) return;
+        hasRun.current = true;
 
-        if (!refreshToken) {
-            console.warn('No refresh token found, user must login');
-            dispatch(logout());
-            return null;
-        }
-
-        try {
-            const response = await refreshSession(refreshToken);
-            const { accessToken, refreshToken: newRefreshToken } = response.data;
-
-            localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, accessToken);
-            localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, newRefreshToken);
-
-            console.log('Tokens refreshed successfully');
-            return accessToken;
-        } catch (error) {
-            console.error('Refresh failed, session expired');
-            dispatch(logout());
-            return null;
-        }
-    };
-
-    const checkAuth = async () => {
-        const token = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
-        if (token) {
+        const checkAuth = async () => {
             try {
-                console.log("token", token);
-                const response = await getProfile();
-                const { user, accessToken, refreshToken, isAuth } = response.data;
+                const response = await refreshSession();
+                const { user, isAuth, accessToken } = response.data;
+
                 dispatch(setAuthSuccess({
                     user,
-                    accessToken,
-                    refreshToken,
-                    isAuth
+                    isAuth,
+                    accessToken
                 }));
-
+                console.log('Silent refresh successful');
             } catch (err) {
-                console.error('Auth check failed, attempting refresh', err);
-                await handleRefresh();
+                console.warn('No active session found');
+                dispatch(logout());
             }
-        }
-    };
+        };
 
-    return {
-        checkAuth
-    };
+        checkAuth();
+    }, [dispatch]);
 };
