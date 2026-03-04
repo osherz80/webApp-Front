@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
-import { setAuthSuccess } from "../store/authSlice";
-import { getProfile } from "../api/Auth.api";
-import { LOCAL_STORAGE_KEYS } from "../utils/const";
+import { setAuthSuccess, logout } from "../store/authSlice";
+import { refreshSession } from "../api/Auth.api";
 import { useEffect } from "react";
 
 export const useCheckAuth = () => {
@@ -9,32 +8,24 @@ export const useCheckAuth = () => {
 
 
     useEffect(() => {
-
-        const handleRefresh = async () => {
-
-        };
-
         const checkAuth = async () => {
-            const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
-            console.log("checkAuth", accessToken);
-            if (accessToken) {
-                try {
-                    console.log("token in try", accessToken);
-                    const response = await getProfile();
-                    console.log("response profile", response.data);
-                    const { user, isAuth } = response.data;
-                    dispatch(setAuthSuccess({
-                        user,
-                        isAuth
-                    }));
+            try {
+                // Attempt to refresh the session - browser sends HttpOnly cookie automatically
+                const response = await refreshSession();
+                const { user, isAuth, accessToken } = response.data;
 
-                } catch (err) {
-                    console.error('Auth check failed, attempting refresh', err);
-                    await handleRefresh();
-                }
+                dispatch(setAuthSuccess({
+                    user,
+                    isAuth,
+                    accessToken
+                }));
+                console.log('Silent refresh successful');
+            } catch (err) {
+                console.warn('No active session found');
+                dispatch(logout());
             }
         };
 
         checkAuth();
-    }, []);
+    }, [dispatch]);
 };

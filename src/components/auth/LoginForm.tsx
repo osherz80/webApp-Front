@@ -24,7 +24,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAuthSuccess, setLoading, setAuthFailure } from '../../store/authSlice';
 import { login, register } from '../../api/Auth.api';
 import type { RootState } from '../../store';
-import { LOCAL_STORAGE_KEYS } from '../../utils/const';
 
 const LoginForm = () => {
     const [mode, setMode] = useState<'login' | 'signup'>('login');
@@ -46,15 +45,12 @@ const LoginForm = () => {
         try {
             const apiCall = mode === 'login' ? login : register;
             const { data } = await apiCall({ email, password });
-
+            console.log("login response data", data);
             dispatch(setAuthSuccess({
                 user: data.user,
-                isAuth: data.isAuth
+                isAuth: data.isAuth,
+                accessToken: data.accessToken
             }));
-
-            if (data.accessToken) {
-                localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, data.accessToken);
-            }
         } catch (err: any) {
             const errorMessage = err.response?.data?.message || 'Authentication failed. Please try again.';
             dispatch(setAuthFailure(errorMessage));

@@ -26,3 +26,8 @@ export const getProfile = () => {
     return API.get<ProfileResponse>(`/user`);
 };
 
+export const logoutApi = () => {
+    console.log("logoutApi");
+    return API.post("/auth/logout");
+};
+
