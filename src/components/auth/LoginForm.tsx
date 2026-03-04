@@ -23,9 +23,8 @@ const LoginForm = () => {
 
     const handleMockLogin = () => {
         dispatch(setAuthSuccess({
-            user: { id: '1', email: 'user@example.com', name: 'John Doe' },
-            accessToken: 'mock-access-token',
-            refreshToken: 'mock-refresh-token'
+            user: { id: '1', email: 'user@example.com', username: 'John Doe' },
+            isAuth: true
         }));
     };
 
