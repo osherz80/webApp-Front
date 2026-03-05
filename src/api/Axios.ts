@@ -1,9 +1,10 @@
 import axios from "axios";
 import { store } from "../store";
 import { setAuthSuccess, logout } from "../store/authSlice";
+import { API_BASE_URL } from "../config";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: API_BASE_URL,
     withCredentials: true, // Crucial for cookies
 });
 
