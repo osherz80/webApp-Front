@@ -57,7 +57,7 @@ const ReviewFormFields: React.FC<ReviewFormFieldsProps> = ({
             />
 
             <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
-                Upload Book Image (Optional)
+                Upload Feeling After Reading Image (Optional)
             </Typography>
             <Box sx={{ mb: 4 }}>
                 <input
