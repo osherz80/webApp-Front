@@ -42,7 +42,7 @@ export const useAddReview = () => {
 
     // Review State
     const [recommendation, setRecommendation] = useState('');
-    const [rating, setRating] = useState<number | null>(0);
+    const [rating, setRating] = useState<number>(0);
     const [userImage, setUserImage] = useState<File | null>(null);
     const [userImageUrl, setUserImageUrl] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
