@@ -1,6 +1,9 @@
 import { useState, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import type { RootState } from '../store';
+import { logout } from '../store/authSlice';
+import { logoutApi } from '../api/Auth.api';
 
 export interface ProfileData {
     name: string;
@@ -42,12 +45,27 @@ export const useProfile = () => {
         setActiveNav(nav);
     };
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            await logoutApi();
+        } catch (error) {
+            console.error('Logout failed', error);
+        } finally {
+            dispatch(logout());
+            navigate('/');
+        }
+    };
+
     return {
         profile,
         activeTab,
         activeNav,
         handleTabChange,
         handleNavChange,
+        handleLogout,
         isLoading: false,
     };
 };

@@ -5,9 +5,10 @@ import type { ProfileData } from '../../hooks/useProfile';
 interface Props {
     profile: ProfileData;
     onEditProfile: () => void;
+    onLogout: () => void;
 }
 
-const ProfileCard = ({ profile, onEditProfile }: Props) => {
+const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
     return (
         <Box
             sx={{
@@ -91,9 +92,31 @@ const ProfileCard = ({ profile, onEditProfile }: Props) => {
                     borderRadius: 2,
                     boxShadow: 'none',
                     textTransform: 'none',
+                    mb: 2,
                 }}
             >
                 Edit Profile
+            </Button>
+
+            <Button
+                variant="outlined"
+                fullWidth
+                onClick={onLogout}
+                sx={{
+                    color: 'text.primary',
+                    borderColor: '#e5e7eb',
+                    '&:hover': {
+                        borderColor: '#d1d5db',
+                        bgcolor: 'rgba(0,0,0,0.02)',
+                    },
+                    py: 1,
+                    fontWeight: 600,
+                    borderRadius: 2,
+                    boxShadow: 'none',
+                    textTransform: 'none',
+                }}
+            >
+                Log Out
             </Button>
         </Box>
     );

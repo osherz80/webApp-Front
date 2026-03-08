@@ -6,7 +6,7 @@ import ProfileContent from '../components/profile/ProfileContent';
 import { useProfile } from '../hooks/useProfile';
 
 const ProfilePage = () => {
-    const { profile, activeNav, activeTab, handleNavChange, handleTabChange } = useProfile();
+    const { profile, activeNav, activeTab, handleNavChange, handleTabChange, handleLogout } = useProfile();
 
     return (
         <MainLayout>
@@ -17,7 +17,7 @@ const ProfilePage = () => {
 
                         {/* Left Sidebar Column */}
                         <Box sx={{ width: { xs: '100%', md: 320 }, flexShrink: 0 }}>
-                            <ProfileCard profile={profile} onEditProfile={() => handleNavChange('edit')} />
+                            <ProfileCard profile={profile} onEditProfile={() => handleNavChange('edit')} onLogout={handleLogout} />
                             <ProfileSideNav activeNav={activeNav} onNavChange={handleNavChange} />
                         </Box>
 
