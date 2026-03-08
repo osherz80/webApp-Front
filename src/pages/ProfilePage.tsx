@@ -17,13 +17,14 @@ const ProfilePage = () => {
 
                         {/* Left Sidebar Column */}
                         <Box sx={{ width: { xs: '100%', md: 320 }, flexShrink: 0 }}>
-                            <ProfileCard profile={profile} />
+                            <ProfileCard profile={profile} onEditProfile={() => handleNavChange('edit')} />
                             <ProfileSideNav activeNav={activeNav} onNavChange={handleNavChange} />
                         </Box>
 
                         {/* Right Content Column */}
                         <Box sx={{ flex: 1 }}>
                             <ProfileContent
+                                profile={profile}
                                 activeNav={activeNav}
                                 activeTab={activeTab}
                                 onTabChange={handleTabChange}

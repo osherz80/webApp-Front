@@ -5,9 +5,10 @@ import type { ProfileData } from '../../hooks/useProfile';
 
 interface Props {
     profile: ProfileData;
+    onEditProfile: () => void;
 }
 
-const ProfileCard = ({ profile }: Props) => {
+const ProfileCard = ({ profile, onEditProfile }: Props) => {
     return (
         <Box
             sx={{
@@ -97,6 +98,7 @@ const ProfileCard = ({ profile }: Props) => {
             <Button
                 variant="outlined"
                 fullWidth
+                onClick={onEditProfile}
                 startIcon={<EditIcon sx={{ fontSize: 20 }} />}
                 sx={{
                     color: 'text.primary',

@@ -1,14 +1,20 @@
 import { Box, Typography } from '@mui/material';
 import ProfileTabs from './ProfileTabs';
-import type { ProfileTab } from '../../hooks/useProfile';
+import EditProfile from './EditProfile';
+import type { ProfileTab, ProfileData } from '../../hooks/useProfile';
 
 interface Props {
+    profile: ProfileData;
     activeNav: string;
     activeTab: ProfileTab;
     onTabChange: (tab: ProfileTab) => void;
 }
 
-const ProfileContent = ({ activeNav, activeTab, onTabChange }: Props) => {
+const ProfileContent = ({ profile, activeNav, activeTab, onTabChange }: Props) => {
+    if (activeNav === 'edit') {
+        return <EditProfile profile={profile} />;
+    }
+
     if (activeNav !== 'posts') {
         return (
             <Box sx={{ flex: 1, p: { xs: 2, md: 0 } }}>
