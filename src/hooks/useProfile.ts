@@ -11,7 +11,7 @@ export interface ProfileData {
     };
 }
 
-export type ProfileTab = 'all' | 'drafts' | 'published' | 'archived';
+export type ProfileTab = 'all' | 'published' | 'archived';
 
 export const useProfile = () => {
     // In a real app, this would fetch from an API using React Query

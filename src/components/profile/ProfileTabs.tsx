@@ -8,7 +8,6 @@ interface Props {
 
 const tabs: { id: ProfileTab; label: string }[] = [
     { id: 'all', label: 'All Posts' },
-    { id: 'drafts', label: 'Drafts (2)' },
     { id: 'published', label: 'Published' },
     { id: 'archived', label: 'Archived' },
 ];
@@ -20,7 +19,6 @@ const ProfileTabs = ({ activeTab, onTabChange }: Props) => {
                 display: 'flex',
                 borderBottom: '1px solid #e5e7eb',
                 mb: 3,
-                overflowX: 'auto', // For mobile responsiveness
             }}
         >
             {tabs.map((tab) => {
