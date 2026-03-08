@@ -1,5 +1,6 @@
 import { Box, Typography, Button, Avatar } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import LogoutIcon from '@mui/icons-material/Logout';
 import type { ProfileData } from '../../hooks/useProfile';
 
 interface Props {
@@ -102,12 +103,13 @@ const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
                 variant="outlined"
                 fullWidth
                 onClick={onLogout}
+                startIcon={<LogoutIcon sx={{ fontSize: 20 }} />}
                 sx={{
-                    color: 'text.primary',
+                    color: '#ef4444',
                     borderColor: '#e5e7eb',
                     '&:hover': {
-                        borderColor: '#d1d5db',
-                        bgcolor: 'rgba(0,0,0,0.02)',
+                        borderColor: '#ef4444',
+                        bgcolor: 'rgba(239, 68, 68, 0.04)',
                     },
                     py: 1,
                     fontWeight: 600,
