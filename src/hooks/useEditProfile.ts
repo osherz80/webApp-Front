@@ -1,14 +1,22 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateProfile } from '../api/Auth.api';
+import { updateUser } from '../store/authSlice';
 import type { ProfileData } from './useProfile';
 
 export const useEditProfile = (initialProfile: ProfileData) => {
-    // The design shows 'alex_reader88' as a username which isn't in original data yet
-    const [username, setUsername] = useState('alex_reader88');
-    const [bio, setBio] = useState(initialProfile.bio);
+    const dispatch = useDispatch();
+    const [username, setUsername] = useState(initialProfile.username || '');
+    const [bio, setBio] = useState(initialProfile.bio || '');
 
-    const handleSave = () => {
-        // Mock save logic for now
-        console.log('Saving profile...', { username, bio });
+    const handleSave = async () => {
+        try {
+            await updateProfile({ username, bio });
+            dispatch(updateUser({ username, bio }));
+            console.log('Profile saved successfully');
+        } catch (error) {
+            console.error('Failed to save profile:', error);
+        }
     };
 
     return {

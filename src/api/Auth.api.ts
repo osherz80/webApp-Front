@@ -26,6 +26,11 @@ export const getProfile = () => {
     return API.get<ProfileResponse>(`/user`);
 };
 
+export const updateProfile = (data: { username?: string; bio?: string; picture?: string }) => {
+    console.log("updateProfile");
+    return API.put(`/user`, data);
+};
+
 export const logoutApi = () => {
     console.log("logoutApi");
     return API.post("/auth/logout");
