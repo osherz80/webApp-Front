@@ -13,7 +13,6 @@ export interface ProfileData {
     stats: {
         posts: number;
         likes: number;
-        following: number;
     };
 }
 
@@ -30,7 +29,6 @@ export const useProfile = () => {
         stats: {
             posts: 42,
             likes: 1200,
-            following: 380,
         },
     }), [user]);
 

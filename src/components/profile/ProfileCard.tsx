@@ -56,7 +56,7 @@ const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-evenly',
                     width: '100%',
                     mb: 3,
                     px: 1,
@@ -69,10 +69,6 @@ const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
                 <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1 }}>{(profile.stats.likes / 1000).toFixed(1)}k</Typography>
                     <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 0.5, fontWeight: 600, fontSize: '0.65rem' }}>LIKES</Typography>
-                </Box>
-                <Box sx={{ textAlign: 'center' }}>
-                    <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1 }}>{profile.stats.following}</Typography>
-                    <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 0.5, fontWeight: 600, fontSize: '0.65rem' }}>FOLLOWING</Typography>
                 </Box>
             </Box>
 
