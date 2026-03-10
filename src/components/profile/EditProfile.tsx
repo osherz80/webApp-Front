@@ -90,6 +90,12 @@ const EditProfile = ({ profile }: Props) => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         variant="outlined"
+                        helperText={`${username.length}/15`}
+                        slotProps={{
+                            formHelperText: {
+                                sx: { textAlign: 'right', color: 'text.secondary', fontWeight: 500 }
+                            }
+                        }}
                         sx={{
                             mb: 4,
                             '& .MuiOutlinedInput-root': {
@@ -110,6 +116,12 @@ const EditProfile = ({ profile }: Props) => {
                         value={bio}
                         onChange={(e) => setBio(e.target.value)}
                         variant="outlined"
+                        helperText={`${bio.length}/100`}
+                        slotProps={{
+                            formHelperText: {
+                                sx: { textAlign: 'right', color: 'text.secondary', fontWeight: 500 }
+                            }
+                        }}
                         sx={{
                             mb: 6,
                             '& .MuiOutlinedInput-root': {
