@@ -15,14 +15,14 @@ const ProfileContent = ({ profile, activeNav, activeTab, onTabChange }: Props) =
         return <EditProfile profile={profile} />;
     }
 
-    if (activeNav !== 'posts') {
+    if (activeNav === 'wishlist') {
         return (
             <Box sx={{ flex: 1, p: { xs: 2, md: 0 } }}>
                 <Typography variant="h4" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                    {activeNav === 'wishlist' ? 'Wishlist' : 'Account Settings'}
+                    Wishlist
                 </Typography>
                 <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3 }}>
-                    Manage your {activeNav === 'wishlist' ? 'saved books' : 'account details'}.
+                    Manage your saved books.
                 </Typography>
             </Box>
         );

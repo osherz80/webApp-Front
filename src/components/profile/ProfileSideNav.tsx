@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import GridViewIcon from '@mui/icons-material/GridView';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import SettingsIcon from '@mui/icons-material/Settings';
 
 interface Props {
     activeNav: string;
@@ -11,7 +10,6 @@ interface Props {
 const navItems = [
     { id: 'posts', label: 'My Posts', icon: <GridViewIcon /> },
     { id: 'wishlist', label: 'Wishlist', icon: <FavoriteBorderIcon /> },
-    { id: 'settings', label: 'Account Settings', icon: <SettingsIcon /> },
 ];
 
 const ProfileSideNav = ({ activeNav, onNavChange }: Props) => {
