@@ -9,17 +9,17 @@ import { API_BASE_URL } from '../../config';
 import type { CommentItemProps } from './CommentDialog.types';
 
 const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
-    const avatarSrc = comment.sender?.picture 
-        ? (comment.sender.picture.startsWith('http') 
-            ? comment.sender.picture 
-            : `${API_BASE_URL}/${comment.sender.picture}`) 
+    const avatarSrc = comment.sender?.profilePicture
+        ? (comment.sender.profilePicture.startsWith('http')
+            ? comment.sender.profilePicture
+            : `${API_BASE_URL}/${comment.sender.profilePicture}`)
         : undefined;
 
     return (
         <Box>
             <Stack direction="row" spacing={2} alignItems="flex-start">
-                <Avatar 
-                    src={avatarSrc} 
+                <Avatar
+                    src={avatarSrc}
                     sx={{ width: 32, height: 32 }}
                 >
                     {comment.sender?.username?.charAt(0).toUpperCase()}

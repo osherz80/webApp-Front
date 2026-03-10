@@ -27,11 +27,10 @@ const EditProfile = ({ profile }: Props) => {
                     alignItems: 'center',
                 }}
             >
-                {/* Avatar Section */}
                 <Box sx={{ position: 'relative', mb: 2 }}>
                     <Avatar
-                        src={profile.avatarUrl}
-                        alt={profile.name}
+                        src={profile.profileprofilePicture}
+                        alt={profile.username}
                         sx={{
                             width: 100,
                             height: 100,
@@ -62,7 +61,7 @@ const EditProfile = ({ profile }: Props) => {
                 </Box>
 
                 <Typography variant="h6" sx={{ fontWeight: 700, mb: 5, color: 'text.primary' }}>
-                    {profile.name}
+                    {profile.username}
                 </Typography>
 
                 <Box sx={{ width: '100%', maxWidth: 600 }}>
@@ -120,7 +119,7 @@ const EditProfile = ({ profile }: Props) => {
                                 fontSize: '1rem',
                                 boxShadow: 'none',
                                 '&:hover': {
-                                    bgcolor: '#059669', // slightly darker green
+                                    bgcolor: '#059669',
                                     boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)',
                                 },
                             }}

@@ -25,8 +25,8 @@ const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
         >
             <Box sx={{ position: 'relative', mb: 2 }}>
                 <Avatar
-                    src={profile.avatarUrl}
-                    alt={profile.name}
+                    src={profile.profileprofilePicture}
+                    alt={profile.username}
                     sx={{
                         width: 120,
                         height: 120,
@@ -37,7 +37,7 @@ const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
             </Box>
 
             <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                {profile.name}
+                {profile.username}
             </Typography>
 
             <Typography

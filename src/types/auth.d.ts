@@ -2,7 +2,7 @@ export interface User {
     id: string;
     email: string;
     username?: string;
-    picture?: string;
+    profilePicture?: string;
     bio?: string;
 }
 

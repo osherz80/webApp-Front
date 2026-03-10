@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import type { RootState } from '../store';
 import { logout } from '../store/authSlice';
 import { logoutApi } from '../api/Auth.api';
+import { defaultProfileUrl } from '../utils/consts';
 
 export interface ProfileData {
-    name: string;
     username?: string;
     bio: string;
-    avatarUrl: string;
+    profileprofilePicture: string;
     stats: {
         posts: number;
         likes: number;
@@ -22,10 +22,9 @@ export const useProfile = () => {
     const { user } = useSelector((state: RootState) => state.auth);
 
     const profile = useMemo<ProfileData>(() => ({
-        name: user?.username || user?.email?.split('@')[0] || 'Unknown User',
-        username: user?.username || '',
+        username: user?.username || user?.email?.split('@')[0] || 'User',
         bio: user?.bio || 'Avid reader and book enthusiast.',
-        avatarUrl: user?.picture || 'https://i.pravatar.cc/150?u=placeholder', // Fallback avatar
+        profileprofilePicture: user?.profilePicture || defaultProfileUrl,
         stats: {
             posts: 42,
             likes: 1200,

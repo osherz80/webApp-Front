@@ -16,7 +16,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ post, currentUserId, onEdit, on
         <CardContent sx={{ pb: 1 }}>
             <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
                 <Stack direction="row" spacing={2} alignItems="center">
-                    <Avatar src={post?.sender?.picture} sx={{ width: 40, height: 40 }} />
+                    <Avatar src={post?.sender?.profilePicture} sx={{ width: 40, height: 40 }} />
                     <Box>
                         <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
                             {post?.sender?.username}

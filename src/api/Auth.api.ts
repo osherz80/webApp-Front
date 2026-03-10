@@ -1,5 +1,5 @@
 import API from "./Axios";
-import type { RegisterLoginReq, RegisterLoginRes, ProfileResponse } from "./types/AuthApi";
+import type { RegisterLoginReq, RegisterLoginRes } from "./types/AuthApi";
 
 export const googleLogin = (token: string) => {
     console.log("googleLogin");
@@ -19,16 +19,6 @@ export const register = (data: RegisterLoginReq) => {
 export const refreshSession = () => {
     console.log("refreshSession");
     return API.post("/auth/refresh");
-};
-
-export const getProfile = () => {
-    console.log("getProfile");
-    return API.get<ProfileResponse>(`/user`);
-};
-
-export const updateProfile = (data: { username?: string; bio?: string; picture?: string }) => {
-    console.log("updateProfile");
-    return API.put(`/user`, data);
 };
 
 export const logoutApi = () => {

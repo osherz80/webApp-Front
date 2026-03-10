@@ -10,8 +10,3 @@ export interface RegisterLoginRes {
     user: User;
     isAuth: boolean;
 }
-
-export interface ProfileResponse {
-    user: User;
-    isAuth: boolean;
-}

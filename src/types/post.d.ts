@@ -10,7 +10,7 @@ export interface Post {
     sender: {
         _id: string;
         username: string;
-        picture?: string;
+        profilePicture?: string;
     };
     createdAt: string;
 }
@@ -21,7 +21,7 @@ export interface Comment {
     sender: {
         _id: string;
         username: string;
-        picture?: string;
+        profilePicture?: string;
     };
     createdAt: string;
 }
