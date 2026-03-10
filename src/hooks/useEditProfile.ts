@@ -9,6 +9,7 @@ export const useEditProfile = (initialProfile: ProfileData) => {
     const [username, setUsername] = useState(initialProfile.username || '');
     const [bio, setBio] = useState(initialProfile.bio || '');
     const [profilePicture, setprofilePicture] = useState(initialProfile.profileprofilePicture || '');
+    const [isPickerOpen, setIsPickerOpen] = useState(false);
 
     const handleSave = async () => {
         try {
@@ -20,13 +21,32 @@ export const useEditProfile = (initialProfile: ProfileData) => {
         }
     };
 
+    const handleUsernameChange = (newUsername: string) => {
+        if (newUsername.length <= 15) {
+            setUsername(newUsername);
+        }
+    };
+
+    const handleBioChange = (newBio: string) => {
+        if (newBio.length <= 100) {
+            setBio(newBio);
+        }
+    };
+
+    const handleSelectPicture = (url: string) => {
+        setprofilePicture(url);
+    };
+
     return {
         username,
-        setUsername,
+        setUsername: handleUsernameChange,
         bio,
-        setBio,
+        setBio: handleBioChange,
         profilePicture,
-        setprofilePicture,
+        setprofilePicture: handleSelectPicture,
+        isPickerOpen,
+        openPicker: () => setIsPickerOpen(true),
+        closePicker: () => setIsPickerOpen(false),
         handleSave,
     };
 };

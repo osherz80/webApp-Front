@@ -37,7 +37,7 @@ const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
             </Box>
 
             <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, color: 'text.primary' }}>
-                {profile.username}
+                {profile.username?.length! > 15 ? profile.username?.slice(0, 15) + '...' : profile.username}
             </Typography>
 
             <Typography

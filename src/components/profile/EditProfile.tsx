@@ -2,13 +2,25 @@ import { Box, Typography, TextField, Button, Avatar } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import type { ProfileData } from '../../hooks/useProfile';
 import { useEditProfile } from '../../hooks/useEditProfile';
+import ProfilePicturePicker from './ProfilePicturePicker';
 
 interface Props {
     profile: ProfileData;
 }
 
 const EditProfile = ({ profile }: Props) => {
-    const { username, setUsername, bio, setBio, handleSave } = useEditProfile(profile);
+    const {
+        username,
+        setUsername,
+        bio,
+        setBio,
+        profilePicture,
+        setprofilePicture,
+        isPickerOpen,
+        openPicker,
+        closePicker,
+        handleSave
+    } = useEditProfile(profile);
 
     return (
         <Box sx={{ flex: 1, p: { xs: 2, md: 0 } }}>
@@ -29,8 +41,8 @@ const EditProfile = ({ profile }: Props) => {
             >
                 <Box sx={{ position: 'relative', mb: 2 }}>
                     <Avatar
-                        src={profile.profileprofilePicture}
-                        alt={profile.username}
+                        src={profilePicture}
+                        alt={username}
                         sx={{
                             width: 100,
                             height: 100,
@@ -39,6 +51,7 @@ const EditProfile = ({ profile }: Props) => {
                         }}
                     />
                     <Box
+                        onClick={openPicker}
                         sx={{
                             position: 'absolute',
                             bottom: 0,
@@ -54,6 +67,10 @@ const EditProfile = ({ profile }: Props) => {
                             cursor: 'pointer',
                             border: '2px solid #fff',
                             boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                            transition: 'transform 0.2s ease',
+                            '&:hover': {
+                                transform: 'scale(1.1)',
+                            }
                         }}
                     >
                         <CameraAltIcon sx={{ fontSize: 14 }} />
@@ -61,7 +78,7 @@ const EditProfile = ({ profile }: Props) => {
                 </Box>
 
                 <Typography variant="h6" sx={{ fontWeight: 700, mb: 5, color: 'text.primary' }}>
-                    {profile.username}
+                    {profile.username?.length! > 30 ? profile.username?.slice(0, 30) + '...' : profile.username}
                 </Typography>
 
                 <Box sx={{ width: '100%', maxWidth: 600 }}>
@@ -129,6 +146,13 @@ const EditProfile = ({ profile }: Props) => {
                     </Box>
                 </Box>
             </Box>
+
+            <ProfilePicturePicker
+                open={isPickerOpen}
+                onClose={closePicker}
+                onSelect={setprofilePicture}
+                currentUrl={profilePicture}
+            />
         </Box>
     );
 };
