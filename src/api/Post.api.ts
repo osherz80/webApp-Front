@@ -35,3 +35,8 @@ export const addComment = (postId: string, message: string) => {
 export const getComments = (postId: string) => {
     return API.get("/comments", { params: { postId } });
 };
+
+export const getPostsByUserId = (userId: string, page: number, limit: number) => {
+    const params = { page, limit };
+    return API.get(`/post/user/${userId}`, { params });
+};
