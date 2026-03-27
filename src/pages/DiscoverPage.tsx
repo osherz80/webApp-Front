@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Container, Box, Typography } from '@mui/material';
+import React from 'react';
+import { Container, Box, Typography, Skeleton, Stack } from '@mui/material';
 import MainLayout from '../components/common/MainLayout';
 import RecommendationHero from '../components/recommendations/RecommendationHero';
 import RecommendationList from '../components/recommendations/RecommendationList';
@@ -10,18 +10,12 @@ import { useAiRecommendations } from '../hooks/useAiRecommendations';
  * It's structured to prioritize the "Get Recommendations" feature at the top.
  */
 const DiscoverPage: React.FC = () => {
-    const { 
-        data: recommendedBooks, 
-        isLoading, 
-        error, 
-        fetchRecommendations,
-        reset 
+    const {
+        data: recommendedBooks,
+        isLoading,
+        error,
+        fetchRecommendations
     } = useAiRecommendations();
-
-    // Cleanup on unmount or on navigation if needed
-    useEffect(() => {
-        return () => reset();
-    }, [reset]);
 
     return (
         <MainLayout>
@@ -29,9 +23,9 @@ const DiscoverPage: React.FC = () => {
                 <Container maxWidth="lg">
                     {/* Page Header for SEO/Accessibility */}
                     <header>
-                        <Typography 
-                            variant="h1" 
-                            sx={{ 
+                        <Typography
+                            variant="h1"
+                            sx={{
                                 display: 'none' // Hidden but present for SEO 
                             }}
                         >
@@ -41,19 +35,19 @@ const DiscoverPage: React.FC = () => {
 
                     {/* AI Recommendation Trigger Section */}
                     <section aria-labelledby="recommendation-hero">
-                        <RecommendationHero 
-                            onTrigger={fetchRecommendations} 
-                            isLoading={isLoading} 
+                        <RecommendationHero
+                            onTrigger={fetchRecommendations}
+                            isLoading={isLoading}
                             hasExisting={!!recommendedBooks && recommendedBooks.length > 0}
                         />
                     </section>
 
                     {/* Results / List Section */}
                     <section aria-labelledby="recommendation-results">
-                        <RecommendationList 
-                            books={recommendedBooks} 
-                            isLoading={isLoading} 
-                            error={error} 
+                        <RecommendationList
+                            books={recommendedBooks}
+                            isLoading={isLoading}
+                            error={error}
                             onRetry={fetchRecommendations}
                         />
                     </section>

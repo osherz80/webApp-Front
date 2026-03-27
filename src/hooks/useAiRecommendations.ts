@@ -1,44 +1,45 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store";
 import { getAiRecommendations } from "../api/Ai.api";
-import type { GoogleBook } from "../types/book";
+import {
+    setRecommendationsLoading,
+    setRecommendationsError,
+    addRecommendations
+} from "../store/recommendationsSlice";
 
 /**
- * Custom hook to handle the AI recommendation fetching logic.
- * Encapsulates state for data, loading, and potential errors.
+ * Custom hook to handle the AI recommendation fetching logic with Redux persistence.
  */
 export const useAiRecommendations = () => {
-    const [data, setData] = useState<GoogleBook[] | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const dispatch = useDispatch();
+
+    // Access the recommendations state from Redux
+    const { recommendations: data, isLoading, error } = useSelector((state: RootState) => state.recommendations);
 
     const fetchRecommendations = useCallback(async () => {
-        setIsLoading(true);
-        setError(null);
+        // Start loading
+        dispatch(setRecommendationsLoading(true));
+        dispatch(setRecommendationsError(null));
+
         try {
-            const recommendations = await getAiRecommendations();
-            
-            setData(prev => {
-                const currentBooks = prev || [];
-                // Create a Set of existing IDs for efficient deduplication
-                const existingIds = new Set(currentBooks.map(b => b.id));
-                
-                // Only add books that aren't already in the list
-                const newUniqueBooks = recommendations.filter(b => !existingIds.has(b.id));
-                
-                return [...newUniqueBooks, ...currentBooks];
-            });
+            const result = await getAiRecommendations();
+            // addRecommendations also sets isLoading to false internally
+            dispatch(addRecommendations(result));
         } catch (err: any) {
             console.error("Failed to fetch AI recommendations:", err);
-            setError(err.response?.data?.message || err.message || "Failed to generate recommendations. Please try again later.");
+            const message = err.response?.data?.message || err.message || "Failed to generate recommendations.";
+            dispatch(setRecommendationsError(message));
         } finally {
-            setIsLoading(false);
+            // Guarantee loading stop in all cases
+            dispatch(setRecommendationsLoading(false));
         }
-    }, []);
+    }, [dispatch]);
 
-    const reset = useCallback(() => {
-        setData(null);
-        setError(null);
-    }, []);
-
-    return { data, isLoading, error, fetchRecommendations, reset };
+    return {
+        data,
+        isLoading,
+        error,
+        fetchRecommendations
+    };
 };

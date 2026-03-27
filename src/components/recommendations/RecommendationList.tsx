@@ -1,9 +1,9 @@
 import React from 'react';
-import { 
-    Box, 
-    Stack, 
-    Typography, 
-    Skeleton, 
+import {
+    Box,
+    Stack,
+    Typography,
+    Skeleton,
     Divider,
     Fade,
     Alert,
@@ -19,18 +19,18 @@ interface RecommendationListProps {
     onRetry?: () => void;
 }
 
-const RecommendationList: React.FC<RecommendationListProps> = ({ books, isLoading, error, onRetry }) => {
-    // Shared skeleton component for consistency - now showing only one card
-    const Skeletons = () => (
-        <Stack spacing={2}>
-            <Skeleton 
-                variant="rounded" 
-                height={120} 
-                sx={{ borderRadius: 3 }} 
-            />
-        </Stack>
-    );
+// Extracted to top-level to prevent React unmounting bugs on every render
+const LoadingSkeleton: React.FC = () => (
+    <Stack spacing={2} sx={{ width: '100%' }}>
+        <Skeleton
+            variant="rounded"
+            height={120}
+            sx={{ borderRadius: 3, width: '100%' }}
+        />
+    </Stack>
+);
 
+const RecommendationList: React.FC<RecommendationListProps> = ({ books, isLoading, error, onRetry }) => {
     if (error) {
         return (
             <Box sx={{ mt: 4, textAlign: 'center' }}>
@@ -45,7 +45,7 @@ const RecommendationList: React.FC<RecommendationListProps> = ({ books, isLoadin
         return (
             <Box sx={{ mt: 4 }}>
                 <Typography variant="h5" sx={{ mb: 3, fontWeight: 700 }}>AI Recommendations</Typography>
-                <Skeletons />
+                <LoadingSkeleton />
             </Box>
         );
     }
@@ -73,15 +73,15 @@ const RecommendationList: React.FC<RecommendationListProps> = ({ books, isLoadin
                     {/* Prepend skeleton if we are loading more to the top */}
                     {isLoading && (
                         <Box sx={{ mb: 1 }}>
-                            <Skeletons />
+                            <LoadingSkeleton />
                         </Box>
                     )}
 
                     {books.map((book) => (
-                        <BookSearchListItem 
-                            key={book.id} 
-                            book={book} 
-                            onSelect={() => {}} 
+                        <BookSearchListItem
+                            key={book.id}
+                            book={book}
+                            onSelect={() => { }}
                         />
                     ))}
                 </Stack>
