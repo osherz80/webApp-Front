@@ -26,7 +26,7 @@ const GoogleBookSearchTab: React.FC<GoogleBookSearchTabProps> = ({
                     placeholder="Search books by title, author, or ISBN..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && onSearch()}
+                    onKeyDown={(e) => e.key === 'Enter' && onSearch()}
                 />
                 <Button
                     variant="contained"
