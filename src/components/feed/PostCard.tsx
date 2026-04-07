@@ -31,6 +31,7 @@ const PostCard: React.FC<PostCardProps> = ({
             <PostContent 
                 post={post} 
                 onOpenComments={onOpenComments} 
+                currentUserId={currentUserId}
             />
         </Card>
     );
