@@ -7,6 +7,7 @@ export interface Post {
     userImage?: string;
     recommendation: string;
     rating: number;
+    likes?: string[];
     sender: {
         _id: string;
         username: string;

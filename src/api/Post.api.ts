@@ -40,3 +40,7 @@ export const getPostsByUserId = (userId: string, page: number, limit: number) =>
     const params = { page, limit };
     return API.get(`/post/user/${userId}`, { params });
 };
+
+export const toggleLikePost = (id: string) => {
+    return API.put(`/post/${id}/like`);
+};
