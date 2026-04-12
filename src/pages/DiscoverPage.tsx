@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Box, Typography, Skeleton, Stack } from '@mui/material';
+import { Container, Box, Typography } from '@mui/material';
 import MainLayout from '../components/common/MainLayout';
 import RecommendationHero from '../components/recommendations/RecommendationHero';
 import RecommendationList from '../components/recommendations/RecommendationList';

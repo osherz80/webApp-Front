@@ -21,12 +21,17 @@ const MyPostsContent = () => {
         user,
         editingPost,
         editMessage,
+        editImageFile,
+        removeImage,
+        isUpdating,
         selectedPostComments,
         comments,
         newComment,
         isLoadingComments,
         setEditingPost,
         setEditMessage,
+        setEditImageFile,
+        setRemoveImage,
         setSelectedPostComments,
         setNewComment,
         fetchPosts,
@@ -90,8 +95,13 @@ const MyPostsContent = () => {
             <EditPostDialog 
                 post={editingPost}
                 message={editMessage}
+                editImageFile={editImageFile}
+                removeImage={removeImage}
+                isUpdating={isUpdating}
                 onClose={() => setEditingPost(null)}
                 onMessageChange={setEditMessage}
+                onImageChange={setEditImageFile}
+                onRemoveImageChange={setRemoveImage}
                 onUpdate={handleUpdate}
             />
 

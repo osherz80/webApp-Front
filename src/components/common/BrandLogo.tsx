@@ -1,4 +1,3 @@
-import React from 'react';
 import { Stack, Box, Typography } from '@mui/material';
 
 const BrandLogo = () => (
