@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview --port 443",
     "start": "vite",
-    "prod": "vite build && vite preview --port 443"
+    "prod": "pm2 restart ecosystem.config.js --env production"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
