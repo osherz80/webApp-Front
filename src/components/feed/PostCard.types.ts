@@ -22,4 +22,5 @@ export interface PostMediaProps {
 export interface PostContentProps {
     post: Post;
     onOpenComments: (post: Post) => void;
+    currentUserId?: string;
 }
