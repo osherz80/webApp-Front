@@ -6,7 +6,8 @@ import {
     Paper, 
     Stack, 
     alpha,
-    useTheme 
+    useTheme,
+    CircularProgress
 } from '@mui/material';
 import { AutoAwesome, CollectionsBookmark } from '@mui/icons-material';
 
@@ -88,7 +89,7 @@ const RecommendationHero: React.FC<RecommendationHeroProps> = ({ onTrigger, isLo
                     size="large"
                     disabled={isLoading}
                     onClick={onTrigger}
-                    startIcon={isLoading ? undefined : <CollectionsBookmark />}
+                    startIcon={isLoading ? <CircularProgress size={20} color="inherit" /> : <CollectionsBookmark />}
                     sx={{ 
                         backgroundColor: '#ffffff',
                         color: theme.palette.primary.main,
