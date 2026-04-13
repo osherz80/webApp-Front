@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getPosts, deletePost, updatePost, getComments, addComment as apiAddComment } from '../api/Post.api';
+import { uploadFile } from '../api/File.api';
 import type { RootState } from '../store';
 import type { Post, Comment } from '../types/post';
 
@@ -13,6 +14,9 @@ export const useFeed = () => {
     // Edit State
     const [editingPost, setEditingPost] = useState<Post | null>(null);
     const [editMessage, setEditMessage] = useState('');
+    const [editImageFile, setEditImageFile] = useState<File | null>(null);
+    const [removeImage, setRemoveImage] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
 
     // Comments State
     const [isLoadingComments, setIsLoadingComments] = useState(false);
@@ -100,13 +104,28 @@ export const useFeed = () => {
 
     const handleUpdate = async () => {
         if (!editingPost) return;
+        setIsUpdating(true);
         try {
-            await updatePost(editingPost._id, { recommendation: editMessage });
-            setPosts(posts.map(p => p._id === editingPost._id ? { ...p, recommendation: editMessage } : p));
+            let newImageUrl = editingPost.userImage;
+            
+            if (removeImage) {
+                newImageUrl = '';
+            }
+            
+            if (editImageFile) {
+                const uploadRes = await uploadFile(editImageFile);
+                newImageUrl = uploadRes.data.url;
+            }
+            await updatePost(editingPost._id, { recommendation: editMessage, userImage: newImageUrl });
+            setPosts(posts.map(p => p._id === editingPost._id ? { ...p, recommendation: editMessage, userImage: newImageUrl } : p));
             setEditingPost(null);
+            setEditImageFile(null);
+            setRemoveImage(false);
             showNotification('Post updated successfully', 'success');
         } catch (err) {
             showNotification('Failed to update post', 'error');
+        } finally {
+            setIsUpdating(false);
         }
     };
 
@@ -143,6 +162,9 @@ export const useFeed = () => {
         user,
         editingPost,
         editMessage,
+        editImageFile,
+        removeImage,
+        isUpdating,
         selectedPostComments,
         comments,
         newComment,
@@ -152,6 +174,8 @@ export const useFeed = () => {
         isDeleting,
         setEditingPost,
         setEditMessage,
+        setEditImageFile,
+        setRemoveImage,
         setSelectedPostComments,
         setNewComment,
         fetchPosts,

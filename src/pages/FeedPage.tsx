@@ -23,12 +23,17 @@ const FeedPage = () => {
         user,
         editingPost,
         editMessage,
+        editImageFile,
+        removeImage,
+        isUpdating,
         selectedPostComments,
         comments,
         newComment,
         isLoadingComments,
         setEditingPost,
         setEditMessage,
+        setEditImageFile,
+        setRemoveImage,
         setSelectedPostComments,
         setNewComment,
         fetchPosts,
@@ -71,6 +76,8 @@ const FeedPage = () => {
                                 onEdit={(p) => {
                                     setEditingPost(p);
                                     setEditMessage(p.recommendation);
+                                    setEditImageFile(null);
+                                    setRemoveImage(false);
                                 }}
                                 onDelete={handleDelete}
                                 onOpenComments={handleOpenComments}
@@ -82,8 +89,17 @@ const FeedPage = () => {
                 <EditPostDialog 
                     post={editingPost}
                     message={editMessage}
-                    onClose={() => setEditingPost(null)}
+                    editImageFile={editImageFile}
+                    removeImage={removeImage}
+                    isUpdating={isUpdating}
+                    onClose={() => {
+                        setEditingPost(null);
+                        setEditImageFile(null);
+                        setRemoveImage(false);
+                    }}
                     onMessageChange={setEditMessage}
+                    onImageChange={setEditImageFile}
+                    onRemoveImageChange={setRemoveImage}
                     onUpdate={handleUpdate}
                 />
 
