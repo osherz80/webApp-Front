@@ -5,6 +5,7 @@ import type { RootState } from '../store';
 import { logout } from '../store/authSlice';
 import { logoutApi } from '../api/Auth.api';
 import { defaultProfileUrl } from '../utils/consts';
+import { useMyPosts } from './useMyPosts';
 
 export interface ProfileData {
     username?: string;
@@ -20,16 +21,17 @@ export type ProfileTab = 'all' | 'published' | 'archived';
 
 export const useProfile = () => {
     const { user } = useSelector((state: RootState) => state.auth);
+    const { posts } = useMyPosts();
 
     const profile = useMemo<ProfileData>(() => ({
         username: user?.username || user?.email?.split('@')[0] || 'User',
         bio: user?.bio || 'Avid reader and book enthusiast.',
         profileprofilePicture: user?.profilePicture || defaultProfileUrl,
         stats: {
-            posts: 42,
-            likes: 1200,
+            posts: posts.length,
+            likes: posts.reduce((sum, post) => sum + (post.likes?.length || 0), 0),
         },
-    }), [user]);
+    }), [user, posts]);
 
     const [activeTab, setActiveTab] = useState<ProfileTab>('all');
     const [activeNav, setActiveNav] = useState('posts');

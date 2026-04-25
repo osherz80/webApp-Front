@@ -67,7 +67,7 @@ const ProfileCard = ({ profile, onEditProfile, onLogout }: Props) => {
                     <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 0.5, fontWeight: 600, fontSize: '0.65rem' }}>POSTS</Typography>
                 </Box>
                 <Box sx={{ textAlign: 'center' }}>
-                    <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1 }}>{(profile.stats.likes / 1000).toFixed(1)}k</Typography>
+                    <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1 }}>{profile.stats.likes}</Typography>
                     <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: 0.5, fontWeight: 600, fontSize: '0.65rem' }}>LIKES</Typography>
                 </Box>
             </Box>
