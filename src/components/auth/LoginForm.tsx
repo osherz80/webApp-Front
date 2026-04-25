@@ -45,7 +45,6 @@ const LoginForm = () => {
         try {
             const apiCall = mode === 'login' ? login : register;
             const { data } = await apiCall({ email, password });
-            console.log("login response data", data);
             dispatch(setAuthSuccess({
                 user: data.user,
                 isAuth: data.isAuth,

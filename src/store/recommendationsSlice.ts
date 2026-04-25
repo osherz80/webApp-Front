@@ -19,9 +19,7 @@ const recommendationsSlice = createSlice({
     initialState,
     reducers: {
         setRecommendationsLoading: (state, action: PayloadAction<boolean>) => {
-            console.log("rec load before", state.isLoading);
             state.isLoading = action.payload;
-            console.log("rec load after", state.isLoading);
         },
         setRecommendationsError: (state, action: PayloadAction<string | null>) => {
             state.error = action.payload;

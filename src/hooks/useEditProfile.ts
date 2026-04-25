@@ -15,7 +15,6 @@ export const useEditProfile = (initialProfile: ProfileData) => {
         try {
             await updateProfile({ username, bio, profilePicture });
             dispatch(updateUser({ username, bio, profilePicture }));
-            console.log('Profile saved successfully');
         } catch (error) {
             console.error('Failed to save profile:', error);
         }

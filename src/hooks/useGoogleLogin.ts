@@ -11,7 +11,6 @@ export const useGoogleLogin = () => {
         dispatch(setLoading(true));
         try {
             const response = await googleLogin(token);
-            console.log("response googleLogin", response.data);
 
             const { user, isAuth, accessToken } = response.data;
             dispatch(setAuthSuccess({
@@ -20,7 +19,6 @@ export const useGoogleLogin = () => {
                 accessToken
             }));
 
-            console.log('User logged in successfully:', user);
         } catch (error) {
             console.error('Backend verification failed:', error);
             dispatch(setAuthFailure('Google login failed'));

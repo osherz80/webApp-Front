@@ -22,7 +22,6 @@ export const useCheckAuth = () => {
                     isAuth,
                     accessToken
                 }));
-                console.log('Silent refresh successful');
             } catch (err) {
                 console.warn('No active session found');
                 dispatch(logout());
