@@ -8,7 +8,6 @@ export const useCheckAuth = () => {
     const hasRun = useRef(false);
 
     useEffect(() => {
-        // Guard against React 18 StrictMode double-mount
         if (hasRun.current) return;
         hasRun.current = true;
 
