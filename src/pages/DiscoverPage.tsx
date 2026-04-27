@@ -5,10 +5,6 @@ import RecommendationHero from '../components/recommendations/RecommendationHero
 import RecommendationList from '../components/recommendations/RecommendationList';
 import { useAiRecommendations } from '../hooks/useAiRecommendations';
 
-/**
- * DiscoverPage allows users to find new books through AI-powered recommendations.
- * It's structured to prioritize the "Get Recommendations" feature at the top.
- */
 const DiscoverPage: React.FC = () => {
     const {
         data: recommendedBooks,
@@ -21,19 +17,17 @@ const DiscoverPage: React.FC = () => {
         <MainLayout>
             <Box component="main" sx={{ flex: 1, py: { xs: 4, md: 8 } }}>
                 <Container maxWidth="lg">
-                    {/* Page Header for SEO/Accessibility */}
                     <header>
                         <Typography
                             variant="h1"
                             sx={{
-                                display: 'none' // Hidden but present for SEO 
+                                display: 'none'
                             }}
                         >
                             Discover New Books
                         </Typography>
                     </header>
 
-                    {/* AI Recommendation Trigger Section */}
                     <section aria-labelledby="recommendation-hero">
                         <RecommendationHero
                             onTrigger={fetchRecommendations}
@@ -42,7 +36,6 @@ const DiscoverPage: React.FC = () => {
                         />
                     </section>
 
-                    {/* Results / List Section */}
                     <section aria-labelledby="recommendation-results">
                         <RecommendationList
                             books={recommendedBooks}

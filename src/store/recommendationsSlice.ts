@@ -28,10 +28,8 @@ const recommendationsSlice = createSlice({
             const newBooks = action.payload;
             const existingIds = new Set(state.recommendations.map(b => b.id));
 
-            // Filter only unique books
             const uniqueNewBooks = newBooks.filter(b => !existingIds.has(b.id));
 
-            // Prepend new books
             state.recommendations = [...uniqueNewBooks, ...state.recommendations];
         },
         clearRecommendations: (state) => {

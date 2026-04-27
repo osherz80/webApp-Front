@@ -44,7 +44,7 @@ export const lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#10b981', // Brand green
+            main: '#10b981',
             contrastText: '#ffffff',
         },
         background: {
@@ -60,9 +60,9 @@ export const lightTheme = createTheme({
         values: {
             xs: 0,
             sm: 600,
-            md: 1024, // Laptop point
-            lg: 1280, // Desktop standard
-            xl: 1536, // Large monitors
+            md: 1024,
+            lg: 1280,
+            xl: 1536,
         },
     },
     spacing: 8,

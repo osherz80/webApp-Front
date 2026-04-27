@@ -6,7 +6,6 @@ import { googleLogin } from '../api/Auth.api';
 export const useGoogleLogin = () => {
     const dispatch = useDispatch();
 
-    // auth with the server now
     const handleGoogleSuccess = async (token: string) => {
         dispatch(setLoading(true));
         try {

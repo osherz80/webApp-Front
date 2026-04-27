@@ -19,7 +19,6 @@ interface RecommendationListProps {
     onRetry?: () => void;
 }
 
-// Extracted to top-level to prevent React unmounting bugs on every render
 const LoadingSkeleton: React.FC = () => (
     <Stack spacing={2} sx={{ width: '100%' }}>
         <Skeleton
@@ -40,7 +39,6 @@ const RecommendationList: React.FC<RecommendationListProps> = ({ books, isLoadin
         );
     }
 
-    // Initial load: no books yet, just loading
     if (isLoading && (!books || books.length === 0)) {
         return (
             <Box sx={{ mt: 4 }}>

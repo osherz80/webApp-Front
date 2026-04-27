@@ -11,27 +11,23 @@ export const useMyPosts = () => {
     const [hasMore, setHasMore] = useState(true);
     const { user } = useSelector((state: RootState) => state.auth);
 
-    // Edit State
     const [editingPost, setEditingPost] = useState<Post | null>(null);
     const [editMessage, setEditMessage] = useState('');
     const [editImageFile, setEditImageFile] = useState<File | null>(null);
     const [removeImage, setRemoveImage] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);
 
-    // Comments State
     const [isLoadingComments, setIsLoadingComments] = useState(false);
     const [selectedPostComments, setSelectedPostComments] = useState<Post | null>(null);
     const [comments, setComments] = useState<Comment[]>([]);
     const [newComment, setNewComment] = useState('');
 
-    // Deletion State
     const [deleteConfirm, setDeleteConfirm] = useState<{ open: boolean; postId: string | null }>({
         open: false,
         postId: null
     });
     const [isDeleting, setIsDeleting] = useState(false);
 
-    // Notification State
     const [notification, setNotification] = useState<{
         open: boolean;
         message: string;

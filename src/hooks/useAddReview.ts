@@ -15,7 +15,6 @@ export const useAddReview = () => {
         setError(null);
     };
 
-    // Search by Google Books API State
     const [searchQuery, setSearchQuery] = useState('');
     const handleSetSearchQuery = (query: string) => {
         setSearchQuery(query);
@@ -25,7 +24,6 @@ export const useAddReview = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [selectedBook, setSelectedBook] = useState<GoogleBook | null>(null);
     
-    // Manual Entry State
     const [manualTitle, setManualTitle] = useState('');
     const handleSetManualTitle = (val: string) => {
         setManualTitle(val);
@@ -40,7 +38,6 @@ export const useAddReview = () => {
     const [manualBookImage, setManualBookImage] = useState<File | null>(null);
     const [manualBookImageUrl, setManualBookImageUrl] = useState<string | null>(null);
 
-    // Review State
     const [recommendation, setRecommendation] = useState('');
     const [rating, setRating] = useState<number>(0);
     const [userImage, setUserImage] = useState<File | null>(null);
